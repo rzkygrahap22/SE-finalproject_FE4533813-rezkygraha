@@ -1,0 +1,46 @@
+PROGRAM todolist
+
+BEGIN
+	READ AND WRITE "todoTugas" with array
+
+    WHILE true DO
+        PRINT " TODO LIST "
+        PRINT "1. Tambah tugas"
+        PRINT "2. Lihat tugas"
+        PRINT "3. Hapus tugas"
+        PRINT "4. Exit"
+        PRINT "Pilih menu: "
+	READ AND WRITE "menu" with number
+	STORE "menu" with TRUE
+
+        IF menu from 1 THEN
+            PRINT "Masukkan tugas baru: "
+	    READ AND WRITE "tugas" with string
+	    STORE "tugas" with TRUE
+	    SET "todoTugas" with ADD(tugas)
+            PRINT "Tugas berhasil ditambahkan."
+
+        ELSE IF menu from 2 THEN
+            PRINT "DAFTAR TUGAS:"
+            FOR "i" from 0 in "todoTugas" with LENGTH() - 1 DO
+                PRINT ["i+1"] with ". " with "todoTugas"["i"]
+            END FOR
+
+        ELSE IF menu from 3 THEN
+            PRINT "Masukkan nomor tugas yang akan dihapus: "
+	    READ AND WRITE "tugas_clear" with number
+	    STORE "tugas_clear" with TRUE
+            IF tugas_clear > 0 AND tugas_clear <= "tasks" with LENGTH() THEN
+	        SET "todoTugas" with REMOVE(tugas_clear-1)
+                PRINT "Tugas berhasil dihapus."
+            ELSE
+                PRINT "Nomor tugas tidak valid."
+
+        ELSE IF menu from 4 THEN
+            PRINT "Terima kasih telah menggunakan aplikasi ini."
+            BREAK
+
+        ELSE
+            PRINT "Menu tidak valid."
+    END WHILE
+END
